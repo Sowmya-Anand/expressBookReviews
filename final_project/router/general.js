@@ -15,7 +15,7 @@ public_users.post("/register", (req,res) => {
     if (exist.length>0){
         return res.send('no');
     }
-    users.push({"username":un,"paassword":pwd});
+    users.push({"username":un,"password":pwd});
     return res.status(200).send('registered!');
 });
 public_users.get('/user',(req,res)=>{
