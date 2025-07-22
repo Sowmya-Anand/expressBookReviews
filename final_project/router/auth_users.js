@@ -37,11 +37,16 @@ regd_users.post("/login", (req,res) => {
 // Add a book review
 regd_users.put("/auth/review/:isbn", (req, res) => {
   const isbn=req.params.isbn;
-  books[isbn].reviews[req.session.authorization.username]=req.body.review;
+  books[isbn].reviews[req.session.authorization.un]=req.body.review;
   console.log(books[isbn]);
   return res.status(300).send('added');
 });
 
+regd_users.delete("/auth/review/:isbn", (req,res)=>{
+    const isbn=req.params.isbn;
+    delete books[isbn].reviews[req.session.authorization.un];
+    res.status(200).send('delete');
+});
 module.exports.authenticated = regd_users;
 module.exports.isValid = isValid;
 module.exports.users = users;
